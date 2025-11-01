@@ -9,6 +9,7 @@ namespace Uqs.Weather.Controllers;
 public class WeatherForecastController : ControllerBase
 {
     private const int FORECAST_DAYS = 5;
+    private readonly ILogger<WeatherForecastController> _logger;
     private readonly IClient _client;
     private readonly INowWrapper _nowWrapper;
     private readonly IRandomWrapper _randomWrapper;
@@ -19,16 +20,17 @@ public class WeatherForecastController : ControllerBase
         "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
     };
 
-    public WeatherForecastController(
+    public WeatherForecastController(ILogger<WeatherForecastController> logger,
         IClient client, INowWrapper nowWrapper, IRandomWrapper randomWrapper)
     {
+        _logger = logger;
         _client = client;
         _nowWrapper = nowWrapper;
         _randomWrapper = randomWrapper;
     }
 
     [HttpGet("ConvertCToF")]
-    public double ConvertCToF(double c, [FromServices] ILogger<WeatherForecastController> _logger)
+    public double ConvertCToF(double c)
     {
         double f = c * (9d / 5d) + 32;
         _logger.LogInformation("conversion requested");
