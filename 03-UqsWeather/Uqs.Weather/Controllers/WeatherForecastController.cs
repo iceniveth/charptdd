@@ -1,5 +1,5 @@
-using Microsoft.AspNetCore.Mvc;
 using AdamTibi.OpenWeather;
+using Microsoft.AspNetCore.Mvc;
 using Uqs.Weather.Wrappers;
 
 namespace Uqs.Weather.Controllers;
@@ -16,12 +16,24 @@ public class WeatherForecastController : ControllerBase
 
     private static readonly string[] Summaries = new[]
     {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild",
-        "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+        "Freezing",
+        "Bracing",
+        "Chilly",
+        "Cool",
+        "Mild",
+        "Warm",
+        "Balmy",
+        "Hot",
+        "Sweltering",
+        "Scorching",
     };
 
-    public WeatherForecastController(ILogger<WeatherForecastController> logger,
-        IClient client, INowWrapper nowWrapper, IRandomWrapper randomWrapper)
+    public WeatherForecastController(
+        ILogger<WeatherForecastController> logger,
+        IClient client,
+        INowWrapper nowWrapper,
+        IRandomWrapper randomWrapper
+    )
     {
         _logger = logger;
         _client = client;
@@ -42,10 +54,12 @@ public class WeatherForecastController : ControllerBase
     {
         const decimal GREENWICH_LAT = 51.4810m;
         const decimal GREENWICH_LON = 0.0052m;
-        OneCallResponse res = await _client.OneCallAsync
-            (GREENWICH_LAT, GREENWICH_LON, new[] {
-                Excludes.Current, Excludes.Minutely,
-                Excludes.Hourly, Excludes.Alerts }, Units.Metric);
+        OneCallResponse res = await _client.OneCallAsync(
+            GREENWICH_LAT,
+            GREENWICH_LON,
+            new[] { Excludes.Current, Excludes.Minutely, Excludes.Hourly, Excludes.Alerts },
+            Units.Metric
+        );
 
         WeatherForecast[] wfs = new WeatherForecast[FORECAST_DAYS];
         for (int i = 0; i < wfs.Length; i++)

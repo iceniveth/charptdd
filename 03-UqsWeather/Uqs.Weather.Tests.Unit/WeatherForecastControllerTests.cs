@@ -23,13 +23,11 @@ public class WeatherForecastControllerTests
     [InlineData(10, 50)]
     public void ConvertCToF_Celsius_CorrectFahrenheit(double c, double f)
     {
-
         var logger = NullLogger<WeatherForecastController>.Instance;
         var controller = new WeatherForecastController(logger, null!, null!, null!);
 
         double actual = controller.ConvertCToF(c);
 
         Assert.Equal(f, actual, 1);
-
     }
 }
