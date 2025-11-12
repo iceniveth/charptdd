@@ -6,7 +6,7 @@ using Uqs.AppointmentBooking.Domain.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<ApplicationContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("AppointmentBooking"))
+    options.UseNpgsql(builder.Configuration.GetConnectionString("AppointmentBooking"))
 );
 
 // Add services to the container.
