@@ -21,7 +21,7 @@ public class ServicesService : IServicesService
     }
 
     public async Task<IEnumerable<Service>> GetActiveServices() =>
-        await _context.Services!.Where(x => x.IsActive).ToArrayAsync();
+        await _context.Services!.AsNoTracking().Where(s => s.IsActive).ToArrayAsync();
 
     public async Task<Service?> GetService(int id) =>
         await _context.Services!.SingleOrDefaultAsync(x => x.IsActive && x.Id == id);

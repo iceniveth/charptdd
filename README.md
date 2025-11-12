@@ -44,6 +44,7 @@ Similar to stubs but use a trick to generate a behavir w/o implmenting the compl
 
 #### Fakes
 
+is a test double that replaces a component during unit testing with an equivalent component more suitable for testing purposes.
 libraries that mimic part or all of a real-life equivalent, and they exist in order to facilitate testing. E.g. EF Core in-memory database, it is designed for testing only..
 
 ---
